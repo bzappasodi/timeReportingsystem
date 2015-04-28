@@ -1,8 +1,8 @@
-<%@ page errorPage="error.jsp"%>
+<%@ page errorPage="error.jsp" %>
 
 
 <jsp:include page="/template/header.jsp">
-    <jsp:param name="title" value="View projects" />
+    <jsp:param name="title" value="View projects"/>
 </jsp:include>
 
 <table cellspacing="3" cellpadding="3" width="600" border="2"
@@ -23,28 +23,28 @@
         <tr>
             <td class=content><a
                     href="SubmitTime.do?projectId=${i.projectId}&type=delete"
-                    onclick="return confirm('Are you sure you want to delete?')" />Delete</a></td>
+                    onclick="return confirm('Are you sure you want to delete?')"/>Delete</a></td>
             <td class=content><a
-                    href="SearchTime.do?type=edit&projectId=${i.projectId}" />Edit</a></td>
+                    href="SearchTime.do?type=edit&projectId=${i.projectId}"/>Edit</a></td>
             <td class=content><a
-                    href="SearchTime.do?type=addtasks&projectId=${i.projectId}" />Add
+                    href="SearchTime.do?type=addtasks&projectId=${i.projectId}"/>Add
                 tasks</a></td>
             <td class="content"><a
                     href="SearchTime.do?type=viewtasks&projectId=${i.projectId}">View
-                    tasks</a></td>
-            <td class=content><c:out value="${i.client}" /></td>
-            <td class=content><c:out value="${i.description}" /></td>
-            <td class=content><c:out value="${i.hours}" /></td>
+                tasks</a></td>
+            <td class=content><c:out value="${i.client}"/></td>
+            <td class=content><c:out value="${i.description}"/></td>
+            <td class=content><c:out value="${i.hours}"/></td>
             <!-- <td class=content><c:out value="${i.totalhours}" /></td> -->
-            <td class=content><c:out value="${i.startdate}" /></td>
-            <td class=content><c:out value="${i.duedate}" /></td>
-            <td class=content><c:out value="${i.invoicesent}" /></td>
+            <td class=content><c:out value="${i.startdate}"/></td>
+            <td class=content><c:out value="${i.duedate}"/></td>
+            <td class=content><c:out value="${i.invoicesent}"/></td>
         </tr>
     </c:forEach>
 
 
 </table>
 
-<%@ include file="/template/footer.jsp"%>
+<%@ include file="/template/footer.jsp" %>
 
 
