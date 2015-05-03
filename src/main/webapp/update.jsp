@@ -1,5 +1,6 @@
 <%@ page errorPage="error.jsp"%>
 
+<%@ include file="/template/jspsupport.jsp" %>
 
 <jsp:include page="/template/header.jsp">
 	<jsp:param name="title" value="Edit task for this project" />

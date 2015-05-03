@@ -1,4 +1,5 @@
 <%@ page errorPage="error.jsp"%>
+<%@ include file="/template/jspsupport.jsp" %>
 
 
 <jsp:include page="/template/header.jsp">

@@ -50,7 +50,7 @@ public class UserDAO {
                 bean.setFirstName(firstName);
                 bean.setLastName(lastName);
                 bean.setValid(true);
-                System.out.println("more failed" +rs);
+
             }
         } catch (Exception ex) {
             System.out.println("Log In failed: An Exception has occurred! "

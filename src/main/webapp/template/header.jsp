@@ -10,8 +10,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/trs-overrides.css">
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+
 
 <title>${param.title}</title>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -44,7 +43,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="SearchTime.do?type=viewprojects">View all projects</a></li>
                 <li><a href="SearchTime.do?type=insertprojects">Insert a new project</a></li>
-                <li><a href="../addnewclient.jsp">Insert a new client</a></li>
+                <li><a href="addnewclient.jsp">Insert a new client</a></li>
             </ul>
         </div>
     </c:if>

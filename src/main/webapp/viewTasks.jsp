@@ -1,7 +1,5 @@
 <%@ page errorPage="error.jsp"%>
-<%@ page import="java.sql.*"%>
-<%@ page import="com.*"%>
-
+<%@ include file="/template/jspsupport.jsp" %>
 <jsp:include page="/template/header.jsp">
 	<jsp:param name="title" value="View tasks for this project" />
 </jsp:include>

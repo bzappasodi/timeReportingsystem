@@ -69,8 +69,10 @@ public class ProjectDB implements ProjectDAO {
             ps.close();
             return projects;
         } catch (SQLException sqle) {
-            return null;
+            System.out.println("Exception has occurred! "
+                    + sqle);
         }
+        return null;
     }
 
     /**

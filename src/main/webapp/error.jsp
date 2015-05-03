@@ -1,4 +1,5 @@
 <%@ page isErrorPage="true"%>
+<%@ include file="/template/jspsupport.jsp" %>
 
 <jsp:include page="/template/header.jsp">
 	<jsp:param name="title" value="View all tasks for this project" />

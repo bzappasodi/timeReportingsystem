@@ -1,4 +1,6 @@
 <%@ page errorPage="error.jsp" %>
+<%@ include file="/template/jspsupport.jsp" %>
+
 <jsp:include page="template/header.jsp">
     <jsp:param name="title" value="Time reporting system login"/>
 </jsp:include>
