@@ -1,12 +1,16 @@
 <%@ page errorPage="error.jsp" %>
 
-
+<script>
+    $(function(){
+        $("#viewtable").dataTable();
+    })
+</script>
 <jsp:include page="/template/header.jsp">
     <jsp:param name="title" value="View projects"/>
 </jsp:include>
 
 <table cellspacing="3" cellpadding="3" width="600" border="2"
-       class="viewtable">
+       id="viewtable">
     <tr>
         <th>Delete</th>
         <th>Edit</th>

@@ -7,10 +7,11 @@
 
 
 
+
+</div>
 <div id="ft" role="contentinfo">&copy;&nbsp;${year} bzappasodi</div>
 
 </div>
-
 
 
 </body>

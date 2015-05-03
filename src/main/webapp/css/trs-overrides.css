@@ -8,3 +8,25 @@ body {
 .contentRed{
     color: #ff3300;
 }
+
+
+/* base rules */
+body {
+    font-family: verdana, helvetica, sans-serif;
+    background-color: #F0F0F0;
+
+}
+
+
+
+
+html {
+    background-color: #F0F0F0;
+}
+
+.stylehr {
+    background: #AEDEE8;
+    color: #AEDEE8;
+    height: 1px;
+}
+
