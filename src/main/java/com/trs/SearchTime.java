@@ -2,7 +2,10 @@ package com.trs;
 
 /**
  * Created by Zapp on 4/24/2015.
-*/
+ */
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,13 +21,12 @@ import javax.servlet.http.HttpSession;
  * @author Bill Zappasodi
  * @version 1.0
  * @see SearchTime
- *
  * @see ProjectDB
  */
 public class SearchTime extends HttpServlet {
-
     private static final long serialVersionUID = 1L;
     private static ProjectDAO ProjectDAO = null;
+    final static Logger logger = LoggerFactory.getLogger(SearchTime.class);
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -35,15 +37,17 @@ public class SearchTime extends HttpServlet {
                          HttpServletResponse response) throws ServletException, IOException {
 
         String projectId = request.getParameter("projectId");
+        boolean foundIt = false;
         if (request.getParameter("type").equals("viewprojects")) {
             HttpSession session = request.getSession();
 
             ProjectDAO = DAOFactory.getProjectDAO();
-            boolean foundIt = false;
+
             if (session.getAttribute("projects") == null) {
                 ArrayList<Project> projects = ProjectDAO.getProjects();
                 session.setAttribute("projects", projects);
                 foundIt = true;
+                logger.info("found It.");
             }
             if (foundIt) {
                 getServletConfig().getServletContext()
@@ -51,7 +55,7 @@ public class SearchTime extends HttpServlet {
                         .forward(request, response);
                 session.removeAttribute("projects");
             } else {
-                System.out.println("No project matches that code.\n");
+                logger.debug("No project matches that code {}. Found it {}", projectId, foundIt);
             }
         }
 
@@ -60,7 +64,7 @@ public class SearchTime extends HttpServlet {
             Project project = new Project();
             project.setProjectId(projectId);
             ProjectDAO = DAOFactory.getProjectDAO();
-            boolean foundIt = false;
+            foundIt = false;
 
             if (session.getAttribute("tasks") == null) {
                 ArrayList<Project> tasks = ProjectDAO.selectProject(projectId);
@@ -74,7 +78,8 @@ public class SearchTime extends HttpServlet {
                         .forward(request, response);
                 session.removeAttribute("tasks");
             } else {
-                System.out.println("No tasks found.\n");
+                logger.debug("No tasks found {} ", foundIt);
+
             }
 
         } else if (request.getParameter("type").equals("addtasks")) {
@@ -83,7 +88,7 @@ public class SearchTime extends HttpServlet {
             project.setProjectId(projectId);
             ProjectDAO = DAOFactory.getProjectDAO();
             Project p = ProjectDAO.getTasks(projectId);
-            boolean foundIt = false;
+            foundIt = false;
             System.out.println();
             if (p != null) {
                 foundIt = true;
@@ -97,7 +102,7 @@ public class SearchTime extends HttpServlet {
                         .forward(request, response);
 
             } else {
-                System.out.println("No project matches that code.\n");
+                logger.debug("No project matches {} ", foundIt);
             }
 
         } else if (request.getParameter("type").equals("edit")) {
@@ -106,14 +111,13 @@ public class SearchTime extends HttpServlet {
             ProjectDAO = DAOFactory.getProjectDAO();
             Project p = ProjectDAO.getTasks(projectId);
 
-            boolean foundIt = false;
+            foundIt = false;
             System.out.println();
             if (p != null) {
                 foundIt = true;
             }
 
             if (foundIt) {
-
                 request.setAttribute("description", p.getDescription());
                 request.setAttribute("startdate", p.getStartdate());
                 request.setAttribute("duedate", p.getDuedate());
@@ -125,7 +129,7 @@ public class SearchTime extends HttpServlet {
                         .forward(request, response);
 
             } else {
-                System.out.println("No project matches that code.\n");
+                logger.debug("No projects found {}", foundIt);
             }
 
         } else if (request.getParameter("type").equals("insertprojects")) {
@@ -133,7 +137,7 @@ public class SearchTime extends HttpServlet {
             HttpSession session = request.getSession();
 
             ProjectDAO = DAOFactory.getProjectDAO();
-            boolean foundIt = false;
+            foundIt = false;
             if (session.getAttribute("clients") == null) {
                 ArrayList<Project> clients = ProjectDAO.getClients();
                 session.setAttribute("clients", clients);
@@ -143,22 +147,13 @@ public class SearchTime extends HttpServlet {
                 getServletConfig().getServletContext()
                         .getRequestDispatcher("/enter.jsp")
                         .forward(request, response);
-
                 session.removeAttribute("clients");
 
             } else {
-                System.out.println("No project matches that code.\n");
+                logger.debug("No project matches that code {}", foundIt);
+
             }
         }
-
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-     * response)
-     */
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-    }
 }

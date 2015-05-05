@@ -1,8 +1,5 @@
 package com.trs;
 
-/**
- * Created by Zapp on 4/24/2015.
- */
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author Bill Zappasodi
  * @version 1.0
  * @see SearchTime
- *
  * @see ProjectDB
  */
 public class SubmitTime extends HttpServlet {

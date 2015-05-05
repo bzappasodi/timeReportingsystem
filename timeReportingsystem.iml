@@ -28,7 +28,6 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: taglibs:standard:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.6" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.0.9" level="project" />
-    <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.0.9" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:webjars-locator:0.1" level="project" />
     <orderEntry type="library" name="Maven: org.reflections:reflections:0.9.8" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:11.0.2" level="project" />
@@ -39,5 +38,7 @@
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:jquery:2.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:bootstrap:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.1.2" level="project" />
+    <orderEntry type="library" name="Maven: ch.qos.logback:logback-access:1.1.2" level="project" />
   </component>
 </module>

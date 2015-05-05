@@ -1,6 +1,9 @@
 package com.trs;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +19,11 @@ import javax.servlet.http.HttpSession;
  * @see LogoutServlet
  */
 public class LoginServlet extends HttpServlet {
+    final static Logger logger = LoggerFactory.getLogger(LoginServlet.class);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, java.io.IOException {
+
         UserBean user = new UserBean();
         user.setUserName(request.getParameter("un"));
         user.setPassword(request.getParameter("pw"));
@@ -48,33 +53,26 @@ public class LoginServlet extends HttpServlet {
 
                 }
             } catch (Throwable e) {
-                System.out.println("Zapp " +e);
+                logger.debug("No valid user {}");
             }
         } else if (request.getParameter("type").equals("registeruser")) {
-
             try {
-
                 user = UserDAO.register(user);
-
                 if (user.isValid()) {
                     user.getFirstName();
                     HttpSession session = request.getSession(true);
                     session.setAttribute("currentSessionUser",
                             user.getFirstName());
-                    response.sendRedirect("SearchTime.do?type=viewprojects"); // logged-in
-                    // page
-
+                    response.sendRedirect("SearchTime.do?type=viewprojects");
                 } else {
-
                     request.setAttribute("databaseResponse",
                             "The user record was not inserted:");
                     getServletConfig().getServletContext()
                             .getRequestDispatcher("/registeruser.jsp")
                             .forward(request, response);
-
                 }
             } catch (Throwable e) {
-                System.out.println(e);
+                logger.debug("No valid user {}", e);
             }
 
         }

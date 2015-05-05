@@ -1,3 +1,4 @@
+<%@ include file="/template/jspsupport.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
