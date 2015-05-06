@@ -1,5 +1,8 @@
 package com.trs;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SubmitTime extends HttpServlet {
     // private static final long serialVersionUID = 1L;
+    final static Logger logger = LoggerFactory.getLogger(SubmitTime.class);
 
     String action = "";
     String projectId = "";
@@ -42,13 +46,14 @@ public class SubmitTime extends HttpServlet {
                 getServletConfig().getServletContext()
                         .getRequestDispatcher("/confirmation.jsp")
                         .forward(request, response);
-
+                logger.debug("deleteProject success");
             } else {
                 request.setAttribute("databaseResponse",
                         "The database has not been updated!!");
                 getServletConfig().getServletContext()
                         .getRequestDispatcher("/confirmation.jsp")
                         .forward(request, response);
+                logger.debug("deleteProject failed");
             }
         }
     }
@@ -93,12 +98,13 @@ public class SubmitTime extends HttpServlet {
                         "The project has been updated!!");
                 getServletConfig().getServletContext()
                         .getRequestDispatcher(url).forward(request, response);
-
+                logger.debug("project update success");
             } else {
                 request.setAttribute("databaseResponse",
                         "The database has not been updated!!");
                 getServletConfig().getServletContext()
                         .getRequestDispatcher(url).forward(request, response);
+                logger.debug("project update failed");
             }
 
         } else if (request.getParameter("type").equals("add_hours")) {
@@ -109,12 +115,14 @@ public class SubmitTime extends HttpServlet {
                         "The new task has has been added to the database!!");
                 getServletConfig().getServletContext()
                         .getRequestDispatcher(url).forward(request, response);
+                logger.debug("add task success");
 
             } else {
                 request.setAttribute("databaseResponse",
                         "The database has not been updated!!");
                 getServletConfig().getServletContext()
                         .getRequestDispatcher(url).forward(request, response);
+                logger.debug("add task fail");
             }
 
         } else if (request.getParameter("type").equals("add")) {
@@ -136,12 +144,14 @@ public class SubmitTime extends HttpServlet {
                     getServletConfig().getServletContext()
                             .getRequestDispatcher(url)
                             .forward(request, response);
+                    logger.debug("add project success");
                 } else {
                     request.setAttribute("databaseResponse",
                             "The database has not been updated!!");
                     getServletConfig().getServletContext()
                             .getRequestDispatcher(url)
                             .forward(request, response);
+                    logger.debug("add project failure");
                 }
 
             }
@@ -167,12 +177,14 @@ public class SubmitTime extends HttpServlet {
                     getServletConfig().getServletContext()
                             .getRequestDispatcher(url)
                             .forward(request, response);
+                    logger.debug("new client added success");
                 } else {
                     request.setAttribute("databaseResponse",
                             "The database has not been updated!!");
                     getServletConfig().getServletContext()
                             .getRequestDispatcher(url)
                             .forward(request, response);
+                    logger.debug("new client added failure");
                 }
 
             }

@@ -4,6 +4,9 @@ package com.trs;
  * Created by Zapp on 4/24/2015.
  */
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 import java.sql.*;
 
@@ -14,13 +17,12 @@ import java.sql.*;
  * @author Bill Zappasodi
  * @version 1.0
  * @see SearchTime
- *
  * @see SubmitTime
  */
 public class ProjectDB implements ProjectDAO {
-
+    final static Logger logger = LoggerFactory.getLogger(ProjectDB.class);
     private Connection connection = null;
-
+/*TO DO combine insert and update */
     public ArrayList<Project> getProjects() {
         try {
             ArrayList<Project> projects = new ArrayList<Project>();
@@ -68,16 +70,15 @@ public class ProjectDB implements ProjectDAO {
             rs.close();
             ps.close();
             return projects;
-        } catch (SQLException sqle) {
-            System.out.println("Exception has occurred! "
-                    + sqle);
+        } catch (SQLException e) {
+            logger.debug("An exception has occured {}", e);
+
         }
         return null;
     }
 
     /**
      * SQL to select all tasks belonging to the project
-     *
      *
      * @return tasks the result collection gets passed back to the controller
      */
@@ -103,17 +104,15 @@ public class ProjectDB implements ProjectDAO {
             rs.close();
             ps.close();
             return tasks;
-        } catch (SQLException sqle) {
-            sqle.printStackTrace(); // for debugging
+        } catch (SQLException e) {
+            logger.debug("An exception has occured for selectProject{}", e);
+
             return null;
         }
     }
 
     /**
      * SQL to select all from projects
-     *
-     *
-     *
      */
     public Project getTasks(String projectId) {
         try {
@@ -139,15 +138,14 @@ public class ProjectDB implements ProjectDAO {
             } else {
                 return null;
             }
-        } catch (SQLException sqle) {
-            sqle.printStackTrace(); // for debugging
+        } catch (SQLException e) {
+            logger.debug("An exception has occured for getTasks{}", e);
             return null;
         }
     }
 
     /**
      * SQL to select all clients
-     *
      *
      * @return clients. The clients result collection gets passed back to the
      * controller
@@ -168,16 +166,14 @@ public class ProjectDB implements ProjectDAO {
             rs.close();
             ps.close();
             return clients;
-        } catch (SQLException sqle) {
-            sqle.printStackTrace(); // for debugging
+        } catch (SQLException e) {
+            logger.debug("An exception has occured for getClients{}", e);
             return null;
         }
     }
 
     /**
      * SQL to select insert a new project
-     *
-     *
      */
     public boolean addProject(Project p) {
         try {
@@ -197,16 +193,14 @@ public class ProjectDB implements ProjectDAO {
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (SQLException sqle) {
-            sqle.printStackTrace(); // for debugging
+        } catch (SQLException e) {
+            logger.debug("An exception has occured for addProject{}", e);
             return false;
         }
     }
 
     /**
      * SQL to delete a new project
-     *
-     *
      */
     public boolean deleteProject(Project p) {
         try {
@@ -218,16 +212,14 @@ public class ProjectDB implements ProjectDAO {
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (SQLException sqle) {
-            sqle.printStackTrace(); // for debugging
+        } catch (SQLException e) {
+            logger.debug("An exception has occured for deleteProject{}", e);
             return false;
         }
     }
 
     /**
      * SQL to update a project
-     *
-     *
      */
     public boolean updateProject(Project p) {
         try {
@@ -245,16 +237,14 @@ public class ProjectDB implements ProjectDAO {
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (SQLException sqle) {
-            sqle.printStackTrace(); // for debugging
+        } catch (SQLException e) {
+            logger.debug("An exception has occured for updateProject{}", e);
             return false;
         }
     }
 
     /**
      * SQL to select insert a new task into a project
-     *
-     *
      */
     public boolean addTask(Project p) {
         try {
@@ -268,16 +258,14 @@ public class ProjectDB implements ProjectDAO {
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (SQLException sqle) {
-            sqle.printStackTrace(); // for debugging
+        } catch (SQLException e) {
+            logger.debug("An exception has occured for addTask{}", e);
             return false;
         }
     }
 
     /**
      * SQL to select insert a new client
-     *
-     *
      */
     public boolean addClient(Project p) {
         try {
@@ -287,12 +275,11 @@ public class ProjectDB implements ProjectDAO {
             PreparedStatement ps = connection.prepareStatement(insert);
             ps.setString(1, p.getName());
             ps.setString(2, p.getAddress());
-
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (SQLException sqle) {
-            sqle.printStackTrace(); // for debugging
+        } catch (SQLException e) {
+            logger.debug("An exception has occured for addClient{}", e);
             return false;
         }
     }

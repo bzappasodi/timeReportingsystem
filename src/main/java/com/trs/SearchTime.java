@@ -47,7 +47,7 @@ public class SearchTime extends HttpServlet {
                 ArrayList<Project> projects = ProjectDAO.getProjects();
                 session.setAttribute("projects", projects);
                 foundIt = true;
-                logger.info("Project id {}. Found it {}", projectId, foundIt);
+                logger.info("Found it {}", foundIt);
             }
             if (foundIt) {
                 getServletConfig().getServletContext()

@@ -4,6 +4,9 @@ package com.trs;
  * Created by Zapp on 4/24/2015.
  */
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -14,9 +17,9 @@ import java.sql.Statement;
  * @author Bill Zappasodi
  * @version 1.0
  * @see UserBean
- *
  */
 public class UserDAO {
+    final static Logger logger = LoggerFactory.getLogger(UserDAO.class);
 
     static Connection currentCon = null;
     static ResultSet rs = null;
@@ -52,9 +55,8 @@ public class UserDAO {
                 bean.setValid(true);
 
             }
-        } catch (Exception ex) {
-            System.out.println("Log In failed: An Exception has occurred! "
-                    + ex);
+        } catch (Exception e) {
+            logger.debug("Search users exception {}", e);
         }
 
         return bean;
@@ -87,9 +89,9 @@ public class UserDAO {
                 bean.setFirstName(firstname);
                 bean.setValid(true);
             }
-        } catch (Exception ex) {
-            System.out.println("Creating new user failed: An Exception has occurred! "
-                    + ex);
+        } catch (Exception e) {
+
+            logger.debug("Creating new user failed: An Exception has occurred! {}", e);
         }
 
         return bean;
