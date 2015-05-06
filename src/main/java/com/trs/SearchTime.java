@@ -47,7 +47,7 @@ public class SearchTime extends HttpServlet {
                 ArrayList<Project> projects = ProjectDAO.getProjects();
                 session.setAttribute("projects", projects);
                 foundIt = true;
-                logger.info("found It.");
+                logger.info("Project id {}. Found it {}", projectId, foundIt);
             }
             if (foundIt) {
                 getServletConfig().getServletContext()
@@ -55,7 +55,7 @@ public class SearchTime extends HttpServlet {
                         .forward(request, response);
                 session.removeAttribute("projects");
             } else {
-                logger.debug("No project matches that code {}. Found it {}", projectId, foundIt);
+                logger.debug("No project matches that code {}.  Found it {}", projectId, foundIt);
             }
         }
 
