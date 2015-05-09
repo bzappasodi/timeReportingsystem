@@ -1,8 +1,5 @@
 package com.trs;
 
-/**
- * Created by Zapp on 4/24/2015.
- */
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,58 +24,50 @@ public class UserDAO {
     // method to check if user exists in db
     public static UserBean login(UserBean bean) {
 
-        Statement stmt = null;
+        Statement stmt;
 
         String username = bean.getUsername();
         String password = bean.getPassword();
-
-        String searchQuery = "select * from users where username='" + username
-                + "' AND password='" + password + "'";
         try {
-            // connect to DB
+            String searchQuery = "select * from users where username='" + username
+                    + "' AND password='" + password + "'";
+
             currentCon = ConnectionManager.getConnection();
             stmt = currentCon.createStatement();
             rs = stmt.executeQuery(searchQuery);
+
             boolean more = rs.next();
-
-            // if user does not exist set the isValid variable to false
             if (!more) {
-
                 bean.setValid(false);
-                System.out.println("bean failed");
-            } // if user exists set the isValid variable to true
-            else if (more) {
+                logger.debug("bean failed ");
+            } else if (more) {
                 String firstName = rs.getString("FirstName");
                 String lastName = rs.getString("LastName");
                 bean.setFirstName(firstName);
                 bean.setLastName(lastName);
                 bean.setValid(true);
-
+                logger.debug("Search users have result {}", rs.next());
             }
         } catch (Exception e) {
             logger.debug("Search users exception {}", e);
         }
 
         return bean;
-
     }
 
     // method to add new user to db
     public static UserBean register(UserBean bean) {
 
-        Statement stmt = null;
+        Statement stmt;
         String username = bean.getUsername();
         String password = bean.getPassword();
         String firstname = bean.getFirstName();
         String lastname = bean.getLastName();
-
-        String searchQuery = "INSERT INTO USERS"
-                + "(FIRSTNAME,LASTNAME,USERNAME,PASSWORD) " + "VALUES('"
-                + firstname + "','" + lastname + "','" + username + "','"
-                + password + "')";
-
         try {
-            // connect to DB
+            String searchQuery = "INSERT INTO USERS"
+                    + "(FIRSTNAME,LASTNAME,USERNAME,PASSWORD) " + "VALUES('"
+                    + firstname + "','" + lastname + "','" + username + "','"
+                    + password + "')";
             currentCon = ConnectionManager.getConnection();
             stmt = currentCon.createStatement();
             rs = stmt.executeQuery(searchQuery);

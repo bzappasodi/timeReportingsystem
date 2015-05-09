@@ -13,7 +13,8 @@
 	<input type="HIDDEN" name="PROJECT_ID" value="${projectId}" />
 
 
-	<table border="0" cellspacing="3" cellpadding="3" class="viewtable">
+    <table border="2"
+           id="viewtable" class="table">
 		<tr>
 			<td width="33%"><b>Project</b></td>
 			<td align="left"><textarea name="DESCRIPTION" rows="8" cols="30">

@@ -7,7 +7,8 @@
 
 
 
-<TABLE width="100%" cellspacing="3" cellpadding="3">
+<table border="2"
+       id="viewtable" class="table">
 
 	<tr>
 		<td>Exception Class:</td>

@@ -4,8 +4,8 @@
 	<jsp:param name="title" value="View tasks for this project" />
 </jsp:include>
 <c:forEach var="i" items="${tasks}">
-	<table border="0" cellspacing="3" cellpadding="3" width="800"
-		class="viewtable">
+    <table border="2"
+           id="viewtable" class="table">
 		<tr>
 			<td width="33%"><b>Task</b></td>
 			<td><c:out value="${i.description}" /></td>

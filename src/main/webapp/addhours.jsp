@@ -12,7 +12,8 @@
 
     <div id="mycal2"></div>
     <div id="mycal"></div>
-    <table border="0" cellspacing="3" cellpadding="3" class="viewtable">
+    <table border="2"
+           id="viewtable" class="table">
 
         <tr>
             <td width="33%"><b>Project</b></td>

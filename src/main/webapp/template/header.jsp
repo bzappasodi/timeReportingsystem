@@ -44,7 +44,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="SearchTime.do?type=viewprojects">View all projects</a></li>
                 <li><a href="SearchTime.do?type=insertprojects">Insert a new project</a></li>
-                <li><a href="addnewclient.jsp">Insert a new client</a></li>
+                <li><a href='${contextPath}/addnewclient.jsp'>Insert a new client</a></li>
             </ul>
         </div>
     </c:if>

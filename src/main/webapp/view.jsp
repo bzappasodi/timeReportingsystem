@@ -7,9 +7,9 @@
     $(function(){
         $("#viewtable").dataTable();
     })
-</script>
-<table cellspacing="3" cellpadding="3" width="600" border="2"
-       id="viewtable">
+</script><div class="table-responsive">
+<table border="2"
+       id="viewtable" class="table">
     <tr>
         <th>Delete</th>
         <th>Edit</th>
@@ -47,7 +47,7 @@
 
 
 </table>
-
+    </div>
 <%@ include file="/template/footer.jsp" %>
 
 

@@ -33,4 +33,4 @@
 </form>
 
 
-<%@ include file=/template/footer.jsp"%>
+<%@ include file="/template/footer.jsp"%>
