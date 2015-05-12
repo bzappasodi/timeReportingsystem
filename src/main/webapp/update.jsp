@@ -6,8 +6,7 @@
 	<jsp:param name="title" value="Edit task for this project" />
 </jsp:include>
 
-<div id="mycal2"></div>
-<div id="mycal"></div>
+
 <form action="SubmitTime.do" method="post" name="enterProject"><input
 	type="HIDDEN" name="type" value="update">
 	<input type="HIDDEN" name="PROJECT_ID" value="${projectId}" />

@@ -22,9 +22,7 @@ public class SubmitTime extends HttpServlet {
     // private static final long serialVersionUID = 1L;
     final static Logger logger = LoggerFactory.getLogger(SubmitTime.class);
 
-    String action = "";
-    String projectId = "";
-    String message = "";
+    String action, projectId, message;
     String url = "/confirmation.jsp";
     private static ProjectDAO projectDAO = null;
 

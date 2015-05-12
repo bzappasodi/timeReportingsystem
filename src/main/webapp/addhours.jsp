@@ -10,8 +10,7 @@
         type="HIDDEN" name="type" value="add_hours"> <input
         type="HIDDEN" name="PROJECT_ID" value="${projectId}"/>
 
-    <div id="mycal2"></div>
-    <div id="mycal"></div>
+
     <table border="2"
            id="viewtable" class="table">
 

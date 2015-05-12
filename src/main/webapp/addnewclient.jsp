@@ -11,7 +11,9 @@
 
 <form action="SubmitTime.do" method="post" name="enterProject"><input
 	type="HIDDEN" name="type" value="addnewclient">
-<table border="0" cellspacing="3" cellpadding="3" class="viewtable">
+
+    <table border="2"
+           id="viewtable" class="table">
 	<tr>
 		<td width="33%"><b>Client Name</b></td>
 		<td><input type="text" name="NAME" size="30"

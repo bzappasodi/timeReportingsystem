@@ -6,7 +6,6 @@
 </jsp:include>
 
 
-
 <table border="2"
        id="viewtable" class="table">
 
@@ -20,7 +19,7 @@
 		<td><%=exception.getMessage()%></td>
 	</tr>
 
-</TABLE>
+</table>
 
 <%@ include file="/template/footer.jsp"%>
 
