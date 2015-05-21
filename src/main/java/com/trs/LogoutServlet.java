@@ -3,6 +3,7 @@ package com.trs;
 /**
  * Created by Zapp on 4/24/2015.
  */
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +18,6 @@ import javax.servlet.http.HttpSession;
  * @author Bill Zappasodi
  * @version 1.0
  * @see LoginServlet
- *
  */
 public class LogoutServlet extends HttpServlet {
 
@@ -31,26 +31,18 @@ public class LogoutServlet extends HttpServlet {
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-     *      response)
+     * response)
      */
 
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-
+        doPost(request, response);
         HttpSession session = request.getSession(true);
         session.invalidate();
         response.sendRedirect("index.jsp"); // logged-in page
 
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-     *      response)
-     */
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-    }
 
 }

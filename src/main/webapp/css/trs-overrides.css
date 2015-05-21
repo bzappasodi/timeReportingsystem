@@ -5,7 +5,7 @@ body {
     padding: 40px 15px;
     text-align: center;
 }
-.contentRed{
+.content-red{
     color: #ff3300;
 }
 
@@ -17,9 +17,16 @@ body {
 
 }
 
+#content{
+    margin:auto;
 
+}
 
-
+.table {
+    width: 70%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
 html {
     background-color: #F0F0F0;
 }

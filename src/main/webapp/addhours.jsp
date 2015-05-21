@@ -17,12 +17,12 @@
         <tr>
             <td width="33%"><b>Project</b></td>
             <td>${description}</td>
-            <td></td>
+
         </tr>
         <tr>
             <td width="33%"><b>Task description</b></td>
             <td><textarea name="DESCRIPTION" rows="8" cols="30"></textarea></td>
-            <td></td>
+
 
         </tr>
 
@@ -31,18 +31,17 @@
             <td><input type="text" name="HOURS_ADDED" id="START_DATE"
                        size="20" value="<c:out value="${param.START_DATE}" />">
             </td>
-            <td></td>
+
         </tr>
         <tr>
             <td width="33%"><b>Hours</b></td>
             <td><input type="text" name="HOURS" size="20" value=""></td>
-            <td align="right"><br>
-            </td>
+
         </tr>
         <tr>
-            <td colspan="3"><input type="submit" value="Submit" name="action"
-                                   class="btn"/> <input type="reset" value="Reset" name="action"
-                                                        class="btn"/></td>
+            <td colspan="2"><input type="submit" value="Submit" name="action"
+                                   class="btn btn-primary btn-lg"/> <input type="reset" value="Reset" name="action"
+                                                                           class="btn btn-primary btn-lg"/></td>
         </tr>
     </table>
 

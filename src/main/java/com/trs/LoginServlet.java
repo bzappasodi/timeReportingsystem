@@ -53,11 +53,13 @@ public class LoginServlet extends HttpServlet {
 
                 }
             } catch (Throwable e) {
-                logger.debug("No valid user {}");
+                logger.warn("No valid user {}");
+
             }
         } else if (request.getParameter("type").equals("registeruser")) {
             try {
                 user = UserDAO.register(user);
+                logger.info("user {}", user);
                 if (user.isValid()) {
                     user.getFirstName();
                     HttpSession session = request.getSession(true);
@@ -72,7 +74,7 @@ public class LoginServlet extends HttpServlet {
                             .forward(request, response);
                 }
             } catch (Throwable e) {
-                logger.debug("No valid user {}", e);
+                logger.warn("No valid user {}", e);
             }
 
         }

@@ -62,11 +62,14 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="starter-template">
+    <div class="row-fluid">
+        <div class="span4"></div>
+        <!--/span-->
+        <div class="span4" align="center">
         <c:if test="${not empty sessionScope.currentSessionUser}">
 
         <div class="row"><h1 class="pull-left">Welcome ${currentSessionUser}</h1>
 
         </div>
-
+            <div class="span4" >    ${param.title}  </div>
         </c:if>

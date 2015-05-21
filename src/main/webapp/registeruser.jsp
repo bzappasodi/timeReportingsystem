@@ -5,81 +5,53 @@
     <jsp:param name="title" value="Time reporting user registration"/>
 </jsp:include>
 
-<%--
-<form action="LoginServlet.do" onsubmit="return checkReg(this);"class="form-horizontal"> <input
-	type="HIDDEN" name="type" value="registeruser">
+<div class="container">
+    <br/>
+    <p><span class="content-red">${databaseResponse}</span></p>
 
-<table cellspacing="3" cellpadding="3" width="420" border="2"
-	class="viewtable">
-
-	<tr>
-		<td>Please enter your first name</td>
-
-		<td><input type="text" name="firstname" /></td>
-	</tr>
-	<tr>
-		<td>Please enter your last name</td>
-		<td><input type="text" name="lastname" /></td>
-	</tr>
-	<tr>
-		<td>Please enter a username</td>
-		<td><input type="text" name="un" /></td>
-	</tr>
-	<tr>
-		<td>Please enter a password</td>
-		<td><input type="password" name="pw" /></td>
-	</tr>
-	<tr>
-		<td colspan="2"><input type="submit" value="Submit" class="btn">&nbsp;<input
-			type="reset" class="btn" value="Reset" name="action" /></td>
-	</tr>
-</table>
-      --%>
-
-    <p><span class="contentRed">${databaseResponse}</span></p>
-
-    <p><span class="contentRed">Please create an account</span></p>
+    <p><span class="content-red">Please create an account</span></p>
     <br/>
 
-    <form action="LoginServlet.do" onsubmit="return checkReg(this);" class="form-horizontal">
+    <form action="LoginServlet.do" onsubmit="return checkReg(this);" class="form-horizontal" role="form">
         <input type="HIDDEN" name="type" value="registeruser">
-    <div class="control-group">
-        <label class="control-label" for="inputfirstname">first name</label>
-
-        <div class="controls">
-            <input type="text" id="inputfirstname" placeholder="first name">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="inputfirstname">First Name:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputfirstname" placeholder="First Name">
+            </div>
         </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="inputlastname">lastname</label>
-
-        <div class="controls">
-            <input type="text" id="inputlastname" placeholder="lastname">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="inputlasttname">Last Name:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputlasttname" placeholder="Last Name">
+            </div>
         </div>
-    </div>
 
-    <div class="control-group">
-        <label class="control-label" for="inputusername">username</label>
-
-        <div class="controls">
-            <input type="text" id="inputusername" placeholder="username">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="inputusername">User Name:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputusername" placeholder="User Name">
+            </div>
         </div>
-    </div>
 
-
-    <div class="control-group">
-        <label class="control-label" for="inputpassword">password</label>
-
-        <div class="controls">
-            <input type="password" id="inputpassword" placeholder="password">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="inputpassword">Password:</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputpassword" placeholder="Password">
+            </div>
         </div>
-    </div>
 
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            </div>
+        </div>
+    </form>
 
 
 
 </form>
+</div>
 
 <%@ include file="/template/footer.jsp" %>

@@ -238,7 +238,7 @@ public class ProjectDB implements ProjectDAO {
             ps.close();
             return true;
         } catch (SQLException e) {
-            logger.debug("An exception has occured for updateProject{}", e);
+            logger.warn("An exception has occured for updateProject{}", e);
             return false;
         }
     }
@@ -259,7 +259,7 @@ public class ProjectDB implements ProjectDAO {
             ps.close();
             return true;
         } catch (SQLException e) {
-            logger.debug("An exception has occured for addTask{}", e);
+            logger.warn("An exception has occured for addTask{}", e);
             return false;
         }
     }
@@ -279,7 +279,7 @@ public class ProjectDB implements ProjectDAO {
             ps.close();
             return true;
         } catch (SQLException e) {
-            logger.debug("An exception has occured for addClient{}", e);
+            logger.warn("An exception has occured for addClient{}", e);
             return false;
         }
     }

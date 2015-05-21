@@ -18,25 +18,25 @@
 			<td width="33%"><b>Project</b></td>
 			<td align="left"><textarea name="DESCRIPTION" rows="8" cols="30">
 				${description}</textarea></td>
-			<td></td>
+
 		</tr>
 		<tr>
 			<td width="33%"><b>Hours Budgeted</b></td>
 			<td><input type="text" name="HOURS" size="20"
 				value="${hours}"></td>
-			<td></td>
+
 		</tr>
 		<tr>
 			<td width="33%"><b>Start date</b></td>
 			<td><input type="text" name="START_DATE" id="START_DATE"
 				size="20" value="${startdate}"> </td>
-			<td></td>
+
 		</tr>
 		<tr>
 			<td width="33%"><b>Due date</b></td>
 			<td><input type="text" name="DUE_DATE" id="DUE_DATE" size="20"
 				value="${duedate}"> </td>
-			<td></td>
+
 		</tr>
 		<tr>
 			<td width="33%"><b>Invoice sent</b></td>
@@ -52,12 +52,12 @@
 					</c:otherwise>
 				</c:choose>
 			</select></td>
-			<td></td>
+
 		</tr>
 		<tr>
-			<td colspan="3"><input type="submit" value="Submit"
-				name="action" class="btn" /> <input type="reset" value="Reset"
-				name="action" class="btn" /></td>
+			<td colspan="2"><input type="submit" value="Submit"
+				name="action" class="btn btn-primary btn-lg" /> <input type="reset" value="Reset"
+				name="action" class="btn btn-primary btn-lg" /></td>
 		</tr>
 
 	</table>

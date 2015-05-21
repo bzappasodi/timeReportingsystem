@@ -27,6 +27,7 @@ public class SearchTime extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static ProjectDAO ProjectDAO = null;
     final static Logger logger = LoggerFactory.getLogger(SearchTime.class);
+    boolean foundIt = false;
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -35,13 +36,13 @@ public class SearchTime extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
-
+        Project project = new Project();
+        ProjectDAO = DAOFactory.getProjectDAO();
         String projectId = request.getParameter("projectId");
-        boolean foundIt = false;
+        project.setProjectId(projectId);
+
         if (request.getParameter("type").equals("viewprojects")) {
             HttpSession session = request.getSession();
-
-            ProjectDAO = DAOFactory.getProjectDAO();
 
             if (session.getAttribute("projects") == null) {
                 ArrayList<Project> projects = ProjectDAO.getProjects();
@@ -55,15 +56,12 @@ public class SearchTime extends HttpServlet {
                         .forward(request, response);
                 session.removeAttribute("projects");
             } else {
-                logger.debug("No project matches that code {}.  Found it {}", projectId, foundIt);
+                logger.info("No project matches that code {}.  Found it {}", projectId, foundIt);
             }
         }
 
         if (request.getParameter("type").equals("viewtasks")) {
             HttpSession session = request.getSession();
-            Project project = new Project();
-            project.setProjectId(projectId);
-            ProjectDAO = DAOFactory.getProjectDAO();
             foundIt = false;
 
             if (session.getAttribute("tasks") == null) {
@@ -78,15 +76,11 @@ public class SearchTime extends HttpServlet {
                         .forward(request, response);
                 session.removeAttribute("tasks");
             } else {
-                logger.debug("No tasks found {} ", foundIt);
+                logger.info("No tasks found {} ", foundIt);
 
             }
 
         } else if (request.getParameter("type").equals("addtasks")) {
-
-            Project project = new Project();
-            project.setProjectId(projectId);
-            ProjectDAO = DAOFactory.getProjectDAO();
             Project p = ProjectDAO.getTasks(projectId);
             foundIt = false;
             System.out.println();
@@ -102,15 +96,11 @@ public class SearchTime extends HttpServlet {
                         .forward(request, response);
 
             } else {
-                logger.debug("No project matches {} ", foundIt);
+                logger.info("No project matches {} ", foundIt);
             }
 
         } else if (request.getParameter("type").equals("edit")) {
-            Project project = new Project();
-            project.setProjectId(projectId);
-            ProjectDAO = DAOFactory.getProjectDAO();
             Project p = ProjectDAO.getTasks(projectId);
-
             foundIt = false;
             System.out.println();
             if (p != null) {
@@ -129,14 +119,11 @@ public class SearchTime extends HttpServlet {
                         .forward(request, response);
 
             } else {
-                logger.debug("No projects found {}", foundIt);
+                logger.info("No projects found {}", foundIt);
             }
 
         } else if (request.getParameter("type").equals("insertprojects")) {
-
             HttpSession session = request.getSession();
-
-            ProjectDAO = DAOFactory.getProjectDAO();
             foundIt = false;
             if (session.getAttribute("clients") == null) {
                 ArrayList<Project> clients = ProjectDAO.getClients();
@@ -150,7 +137,7 @@ public class SearchTime extends HttpServlet {
                 session.removeAttribute("clients");
 
             } else {
-                logger.debug("No project matches that code {}", foundIt);
+                logger.info("No project matches that code {}", foundIt);
 
             }
         }
