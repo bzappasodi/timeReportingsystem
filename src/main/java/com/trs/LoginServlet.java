@@ -20,24 +20,21 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginServlet extends HttpServlet {
     final static Logger logger = LoggerFactory.getLogger(LoginServlet.class);
+    UserBean user;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, java.io.IOException {
 
-        UserBean user = new UserBean();
+        user = new UserBean();
         user.setUserName(request.getParameter("un"));
         user.setPassword(request.getParameter("pw"));
         user.setFirstName(request.getParameter("firstname"));
         user.setLastName(request.getParameter("lastname"));
 
         if (request.getParameter("type").equals("login")) {
-
             try {
-
                 user = UserDAO.login(user);
-
                 if (user.isValid()) {
-                    user.getFirstName();
                     HttpSession session = request.getSession(true);
                     session.setAttribute("currentSessionUser",
                             user.getFirstName());
@@ -50,11 +47,9 @@ public class LoginServlet extends HttpServlet {
                     getServletConfig().getServletContext()
                             .getRequestDispatcher("/registeruser.jsp")
                             .forward(request, response);
-
                 }
             } catch (Throwable e) {
                 logger.warn("No valid user {}");
-
             }
         } else if (request.getParameter("type").equals("registeruser")) {
             try {

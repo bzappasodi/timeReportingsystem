@@ -9,7 +9,7 @@
 
 <form action="SubmitTime.do" method="post" name="enterProject"><input
 	type="HIDDEN" name="type" value="update">
-	<input type="HIDDEN" name="PROJECT_ID" value="${projectId}" />
+    <input type="HIDDEN" name="PROJECT_ID" value="${projectId}" />
 
 
     <table border="2"
@@ -22,7 +22,7 @@
 		</tr>
 		<tr>
 			<td width="33%"><b>Hours Budgeted</b></td>
-			<td><input type="text" name="HOURS" size="20"
+			<td><input type="number" name="HOURS" size="20"
 				value="${hours}"></td>
 
 		</tr>

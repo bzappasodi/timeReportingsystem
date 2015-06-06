@@ -32,7 +32,7 @@
         <tr>
             <td width="33%"><b>Hours budgeted</b></td>
 
-            <td><input type="text" name="HOURS" size="10" value=""></td>
+            <td><input type="number" name="HOURS" size="10" value=""></td>
 
         </tr>
         <tr>

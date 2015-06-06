@@ -21,23 +21,47 @@ import javax.servlet.http.HttpServletResponse;
 public class SubmitTime extends HttpServlet {
     // private static final long serialVersionUID = 1L;
     final static Logger logger = LoggerFactory.getLogger(SubmitTime.class);
-
-    String action, projectId, message;
-    final String CONFIRM_URL = "/confirmation.jsp";
-    final String ENTER_URL = "/enter.jsp";
-    final String NEW_CLIENT_URL = "/addnewclient.jsp";
-
+    String action = "";
+    String projectId = "";
+    String message = "";
+    String url = "/confirmation.jsp";
     private static ProjectDAO projectDAO = null;
 
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-        projectId = request.getParameter("PROJECT_ID");
-        //projectId = request.getParameter("projectId");
-
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        projectId = request.getParameter("projectId");
         Project project = new Project();
         project.setProjectId(projectId);
         projectDAO = DAOFactory.getProjectDAO();
+        if (request.getParameter("type").equals("delete")) {
+
+            boolean success = projectDAO.deleteProject(project);
+
+            if (success) {
+                request.setAttribute("databaseResponse",
+                        "The database has been updated!!");
+                getServletConfig().getServletContext()
+                        .getRequestDispatcher("/SearchTime.do?type=viewprojects")
+                        .forward(request, response);
+
+            } else {
+                request.setAttribute("databaseResponse",
+                        "The database has not been updated!!");
+                getServletConfig().getServletContext()
+                        .getRequestDispatcher("/SearchTime.do?type=viewprojects")
+                        .forward(request, response);
+            }
+        }
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     * response)
+     */
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response) throws ServletException, IOException {
+        projectId = request.getParameter("PROJECT_ID");
         String description = request.getParameter("DESCRIPTION");
         String hours = request.getParameter("HOURS");
         String hoursadded = request.getParameter("HOURS_ADDED");
@@ -47,6 +71,8 @@ public class SubmitTime extends HttpServlet {
         String invoicesent = request.getParameter("INVOICE_SENT");
         String name = request.getParameter("NAME");
         String address = request.getParameter("ADDRESS");
+
+        Project project = new Project();
         project.setProjectId(projectId);
         project.setDescription(description);
         project.setClientId(clientId);
@@ -61,6 +87,7 @@ public class SubmitTime extends HttpServlet {
         projectDAO = DAOFactory.getProjectDAO();
 
         if (request.getParameter("type").equals("update")) {
+            logger.info("type {}", request.getParameter("type"));
 
             boolean success = projectDAO.updateProject(project);
 
@@ -68,14 +95,14 @@ public class SubmitTime extends HttpServlet {
                 request.setAttribute("databaseResponse",
                         "The project has been updated!!");
                 getServletConfig().getServletContext()
-                        .getRequestDispatcher(CONFIRM_URL).forward(request, response);
-                logger.debug("project update success");
+                        .getRequestDispatcher(url).forward(request, response);
+                logger.info("success {}", success);
             } else {
                 request.setAttribute("databaseResponse",
                         "The database has not been updated!!");
                 getServletConfig().getServletContext()
-                        .getRequestDispatcher(CONFIRM_URL).forward(request, response);
-                logger.debug("project update failed");
+                        .getRequestDispatcher(url).forward(request, response);
+                logger.info("success fail {}",success);
             }
 
         } else if (request.getParameter("type").equals("add_hours")) {
@@ -85,44 +112,42 @@ public class SubmitTime extends HttpServlet {
                 request.setAttribute("databaseResponse",
                         "The new task has has been added to the database!!");
                 getServletConfig().getServletContext()
-                        .getRequestDispatcher(CONFIRM_URL).forward(request, response);
-                logger.debug("add task success");
+                        .getRequestDispatcher(url).forward(request, response);
+                logger.info("success ",success);
 
             } else {
                 request.setAttribute("databaseResponse",
                         "The database has not been updated!!");
                 getServletConfig().getServletContext()
-                        .getRequestDispatcher(CONFIRM_URL).forward(request, response);
-                logger.debug("add task fail");
+                        .getRequestDispatcher(url).forward(request, response);
+                logger.info("no success ",success);
             }
 
         } else if (request.getParameter("type").equals("add")) {
 
             if (description.length() == 0 || hours.length() == 0
                     || startdate.length() == 0 || duedate.length() == 0) {
-                message = "Please fill in the missing fileds";
-
+                message = "Please fill in the missing fields";
+                url = "/enter.jsp";
                 request.setAttribute("errors", message);
                 getServletConfig().getServletContext()
-                        .getRequestDispatcher(ENTER_URL).forward(request, response);
+                        .getRequestDispatcher(url).forward(request, response);
             } else {
                 boolean success = projectDAO.addProject(project);
-
+                url = "/confirmation.jsp";
 
                 if (success) {
                     request.setAttribute("databaseResponse",
                             "The new project has has been added to the database!!");
                     getServletConfig().getServletContext()
-                            .getRequestDispatcher(CONFIRM_URL)
+                            .getRequestDispatcher(url)
                             .forward(request, response);
-                    logger.debug("add project success");
                 } else {
                     request.setAttribute("databaseResponse",
                             "The database has not been updated!!");
                     getServletConfig().getServletContext()
-                            .getRequestDispatcher(CONFIRM_URL)
+                            .getRequestDispatcher(url)
                             .forward(request, response);
-                    logger.debug("add project failure");
                 }
 
             }
@@ -130,14 +155,14 @@ public class SubmitTime extends HttpServlet {
         } else if (request.getParameter("type").equals("addnewclient")) {
 
             if (name.length() == 0 || address.length() == 0) {
-                message = "Please fill in the missing fileds";
-
+                message = "Please fill in the missing fields";
+                url = "/addnewclient.jsp";
                 request.setAttribute("errors", message);
                 getServletConfig().getServletContext()
-                        .getRequestDispatcher(NEW_CLIENT_URL).forward(request, response);
+                        .getRequestDispatcher(url).forward(request, response);
             } else {
                 boolean success = projectDAO.addClient(project);
-
+                url = "/confirmation.jsp";
 
                 if (success) {
                     request.setAttribute(
@@ -146,40 +171,19 @@ public class SubmitTime extends HttpServlet {
                                     + name
                                     + " has has been added as a new client to the database!!");
                     getServletConfig().getServletContext()
-                            .getRequestDispatcher(CONFIRM_URL)
+                            .getRequestDispatcher(url)
                             .forward(request, response);
-                    logger.debug("new client added success");
                 } else {
                     request.setAttribute("databaseResponse",
                             "The database has not been updated!!");
                     getServletConfig().getServletContext()
-                            .getRequestDispatcher(CONFIRM_URL)
+                            .getRequestDispatcher(url)
                             .forward(request, response);
-                    logger.debug("new client added failure");
                 }
 
             }
 
-        } else if (request.getParameter("type").equals("delete")) {
-            boolean success = projectDAO.deleteProject(project);
-
-            if (success) {
-                request.setAttribute("databaseResponse",
-                        "The database has been updated!!");
-                getServletConfig().getServletContext()
-                        .getRequestDispatcher(CONFIRM_URL)
-                        .forward(request, response);
-                logger.debug("deleteProject success");
-            } else {
-                request.setAttribute("databaseResponse",
-                        "The database has not been updated!!");
-                getServletConfig().getServletContext()
-                        .getRequestDispatcher(CONFIRM_URL)
-                        .forward(request, response);
-                logger.debug("deleteProject failed");
-            }
         }
 
     }
 }
-

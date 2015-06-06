@@ -20,9 +20,10 @@ import java.sql.*;
  * @see SubmitTime
  */
 public class ProjectDB implements ProjectDAO {
-    final static Logger logger = LoggerFactory.getLogger(ProjectDB.class);
+
     private Connection connection = null;
-/*TO DO combine insert and update */
+    final static Logger logger = LoggerFactory.getLogger(ProjectDAO.class);
+
     public ArrayList<Project> getProjects() {
         try {
             ArrayList<Project> projects = new ArrayList<Project>();
@@ -70,11 +71,9 @@ public class ProjectDB implements ProjectDAO {
             rs.close();
             ps.close();
             return projects;
-        } catch (SQLException e) {
-            logger.debug("An exception has occured {}", e);
-
+        } catch (SQLException sqle) {
+            return null;
         }
-        return null;
     }
 
     /**
@@ -104,9 +103,8 @@ public class ProjectDB implements ProjectDAO {
             rs.close();
             ps.close();
             return tasks;
-        } catch (SQLException e) {
-            logger.debug("An exception has occured for selectProject{}", e);
-
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(); // for debugging
             return null;
         }
     }
@@ -138,8 +136,8 @@ public class ProjectDB implements ProjectDAO {
             } else {
                 return null;
             }
-        } catch (SQLException e) {
-            logger.debug("An exception has occured for getTasks{}", e);
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(); // for debugging
             return null;
         }
     }
@@ -166,8 +164,8 @@ public class ProjectDB implements ProjectDAO {
             rs.close();
             ps.close();
             return clients;
-        } catch (SQLException e) {
-            logger.debug("An exception has occured for getClients{}", e);
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(); // for debugging
             return null;
         }
     }
@@ -193,8 +191,8 @@ public class ProjectDB implements ProjectDAO {
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (SQLException e) {
-            logger.debug("An exception has occured for addProject{}", e);
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(); // for debugging
             return false;
         }
     }
@@ -212,8 +210,8 @@ public class ProjectDB implements ProjectDAO {
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (SQLException e) {
-            logger.debug("An exception has occured for deleteProject{}", e);
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(); // for debugging
             return false;
         }
     }
@@ -222,6 +220,7 @@ public class ProjectDB implements ProjectDAO {
      * SQL to update a project
      */
     public boolean updateProject(Project p) {
+
         try {
             String update = "UPDATE PROJECTS SET " + "DESCRIPTION = ?, "
                     + "HOURS = ?, " + "STARTDATE = ?, " + "DUEDATE = ?, " + "INVOICESENT = ? "
@@ -235,10 +234,13 @@ public class ProjectDB implements ProjectDAO {
             ps.setString(5, p.getInvoicesent());
             ps.setString(6, p.getProjectId());
             ps.executeUpdate();
+
+            logger.info("ps {}", ps);
             ps.close();
             return true;
-        } catch (SQLException e) {
-            logger.warn("An exception has occured for updateProject{}", e);
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(); // for debugging
+
             return false;
         }
     }
@@ -255,11 +257,13 @@ public class ProjectDB implements ProjectDAO {
             ps.setString(2, p.getHoursadded());
             ps.setString(3, p.getDescription());
             ps.setString(4, p.getHours());
+
             ps.executeUpdate();
+
             ps.close();
             return true;
-        } catch (SQLException e) {
-            logger.warn("An exception has occured for addTask{}", e);
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(); // for debugging
             return false;
         }
     }
@@ -275,11 +279,12 @@ public class ProjectDB implements ProjectDAO {
             PreparedStatement ps = connection.prepareStatement(insert);
             ps.setString(1, p.getName());
             ps.setString(2, p.getAddress());
+
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (SQLException e) {
-            logger.warn("An exception has occured for addClient{}", e);
+        } catch (SQLException sqle) {
+            sqle.printStackTrace(); // for debugging
             return false;
         }
     }

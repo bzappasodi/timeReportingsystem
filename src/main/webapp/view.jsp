@@ -7,7 +7,9 @@
     $(function(){
         $("#viewtable").dataTable();
     })
-</script><div class="table-responsive">
+</script>
+<span class="content-red"><c:out value="${databaseResponse}" /></span>
+<div class="table-responsive">
 <table border="2"
        id="viewtable" class="table">
     <tr>
@@ -24,13 +26,11 @@
     </tr>
     <c:forEach var="i" items="${projects}">
         <tr>
+            <td class=content><a href="SubmitTime.do?projectId=${i.projectId}&type=delete" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
             <td class=content><a
-                    href="SubmitTime.do?projectId=${i.projectId}&type=delete"
-                    onclick="return confirm('Are you sure you want to delete?')"/>Delete</a></td>
+                    href="SearchTime.do?type=edit&projectId=${i.projectId}">Edit</a></td>
             <td class=content><a
-                    href="SearchTime.do?type=edit&projectId=${i.projectId}"/>Edit</a></td>
-            <td class=content><a
-                    href="SearchTime.do?type=addtasks&projectId=${i.projectId}"/>Add
+                    href="SearchTime.do?type=addtasks&projectId=${i.projectId}">Add
                 tasks</a></td>
             <td class="content"><a
                     href="SearchTime.do?type=viewtasks&projectId=${i.projectId}">View

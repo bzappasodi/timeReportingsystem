@@ -25,6 +25,7 @@ public class ConnectionManager {
                 con = DriverManager.getConnection(
                         "jdbc:oracle:thin:@localhost:1521:XE", "trs", "trs");
 
+                logger.debug("connection success {} ", con);
             } catch (SQLException e) {
                 logger.debug("connection failed {}. Exception {} ", con, e);
 

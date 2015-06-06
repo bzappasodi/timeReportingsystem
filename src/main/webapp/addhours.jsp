@@ -6,9 +6,9 @@
     <jsp:param name="title" value="Add a task for this project"/>
 </jsp:include>
 
-<form action="SubmitTime.do" method="post" name="enterProject"><input
-        type="HIDDEN" name="type" value="add_hours"> <input
-        type="HIDDEN" name="PROJECT_ID" value="${projectId}"/>
+<form action="SubmitTime.do" method="post" name="enterProject">
+    <input type="HIDDEN" name="type" value="add_hours">
+    <input type="HIDDEN" name="PROJECT_ID" value="${projectId}"/>
 
 
     <table border="2"
@@ -35,7 +35,7 @@
         </tr>
         <tr>
             <td width="33%"><b>Hours</b></td>
-            <td><input type="text" name="HOURS" size="20" value=""></td>
+            <td><input type="number" name="HOURS" size="20" value=""></td>
 
         </tr>
         <tr>

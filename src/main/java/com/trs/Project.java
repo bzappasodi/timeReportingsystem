@@ -1,6 +1,10 @@
 package com.trs;
 
 
+/**
+ * Created by Zapp on 4/24/2015.
+ */
+
 public class Project {
 
     private String client;
